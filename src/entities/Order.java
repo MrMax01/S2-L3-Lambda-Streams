@@ -12,9 +12,12 @@ public class Order {
     private List<Product> products;
     private  Customer customer;
 
-    public Order(String status, List<Product> products, Customer customer) {
-        this.status = status;
-
+    public Order( List<Product> products, Customer customer) {
+        Random rdm = new Random();
+        setStatus();
+        this.id = rdm.nextLong();
+        setOrderDate();
+        setDeliveryDate();
         this.products = products;
         this.customer = customer;
     }
@@ -30,7 +33,8 @@ public class Order {
         } else if (today.equals(this.deliveryDate)) {
             this.status="delivery Today";
         }else{
-            this.status= "mancano"+(today.until(this.deliveryDate))+ "alla consegna";
+            //this.status= "mancano"+(today.until(this.deliveryDate))+ "alla consegna";
+            this.status= "da fare";
         }
     }
 
@@ -49,7 +53,7 @@ public class Order {
 
     public void setDeliveryDate() {
         Random rnd= new Random();
-        this.deliveryDate = this.orderDate.plusDays(rnd.nextInt(1,10));
+        this.deliveryDate = this.orderDate.plusDays(rnd.nextInt(0,10));
     }
 
     public List<Product> getProducts() {
